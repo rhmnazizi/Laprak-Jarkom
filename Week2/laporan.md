@@ -17,11 +17,11 @@ Menggunakan Wireshark untuk melakukan *test run* (pengambilan paket jaringan) da
 1. **Persiapan Antarmuka:** Memastikan komputer terhubung ke internet melalui antarmuka Ethernet kabel atau jaringan nirkabel (Wi-Fi).
 
 2. **Membuka Wireshark:** Menjalankan aplikasi Wireshark. Untuk memulai, masuk ke menu dan pilih wifi, karena wifi jaringan yang sedang aktif. Lalu stelah memilih klik **start**.
-* ![Daftar Antarmuka Wireshark](images/image.png)
+* ![Daftar Antarmuka Wireshark](images/Home.png)
 
 3. **Menghasilkan Lalu Lintas Jaringan:** Membuka *browser* web, disini contohnya mengakses URL berikut untuk memicu lalu lintas protokol HTTP:
    `http://gaia.cs.umass.edu/wireshark-labs/INTRO-wireshark-file1.html`
-* ![Halaman Web Browser](images/webskem.png)
+* ![Halaman Web Browser](images/WEB.png)
 
 5. **Menghentikan Capture:** Setelah halaman web berhasil dimuat, proses perekaman dihentikan dengan menekan ikon kotak merah pada antarmuka Wireshark.
 
