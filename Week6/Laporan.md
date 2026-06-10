@@ -10,7 +10,7 @@
 
 ---
 
-## 1 Tujuan Praktikum
+## 1. Tujuan Praktikum
 1. Analisis cara kerja TCP menggunakan Wireshark
 2. Identifikasi sequence number, acknowledgment, dan reliability mechanism
 3. Amati congestion control (slow start & congestion avoidance)
@@ -203,7 +203,7 @@ Tidak ada timeout
 
 ---
 
-## 4 Ringkasan Hasil
+## 4. Ringkasan Hasil
 
 | Parameter | Nilai |
 |-----------|-------|
@@ -219,15 +219,15 @@ Tidak ada timeout
 
 ---
 
-## 5 Kesimpulan
+## 5. Kesimpulan
 
 | No | Kesimpulan | Implikasi Praktis |
 |----|-----------|-------------------|
-| 1 | Three-way handshake berhasil dengan negosiasi MSS, window scale, dan SACK | Koneksi established dengan aman, parameter ternegosiasi dengan benar |
-| 2 | Sequence & ACK bekerja sesuai teori: ack = seq + length | Data terlacak dengan akurat, tidak ada ambiguity atau loss |
-| 3 | Flow control berfungsi baik: window tidak pernah 0 | Tidak ada hambatan transfer, receiver selalu siap proses data |
-| 4 | Congestion control teramati jelas: Slow start (eksponensial) → Congestion avoidance (linear) | Implementasi TCP sesuai RFC 5681, algoritma berfungsi normal |
-| 5 | Throughput ~0.525 Mbps dengan efisiensi 28% | Wajar untuk RTT ~276 ms dan file kecil; untuk produksi butuh file lebih besar |
-| 6 | Tidak ada retransmisi atau packet loss terdeteksi | Jaringan sangat stabil, kualitas koneksi excellent untuk transfer |
-| 7 | Wireshark efektif untuk analisis TCP mendalam | Tool wajib untuk debugging, optimasi, dan learning jaringan |
-| 8 | Rekomendasi: file >10MB untuk analisis lengkap congestion control | Untuk observasi congestion control steady-state yang komprehensif |
+| 1 | Three-way handshake berhasil dengan negosiasi MSS, window scale, dan SACK. | Koneksi established dengan aman, parameter ternegosiasi dengan benar. |
+| 2 | Sequence & ACK bekerja sesuai teori: ack = seq + length. | Data terlacak dengan akurat, tidak ada ambiguity atau loss. |
+| 3 | Flow control berfungsi baik: window tidak pernah 0. | Tidak ada hambatan transfer, receiver selalu siap proses data. |
+| 4 | Congestion control teramati jelas: Slow start (eksponensial) → Congestion avoidance (linear). | Implementasi TCP sesuai RFC 5681, algoritma berfungsi normal. |
+| 5 | Throughput ~0.525 Mbps dengan efisiensi 28%. | Wajar untuk RTT ~276 ms dan file kecil; untuk produksi butuh file lebih besar. |
+| 6 | Tidak ada retransmisi atau packet loss terdeteksi. | Jaringan sangat stabil, kualitas koneksi excellent untuk transfer. |
+| 7 | Wireshark efektif untuk analisis TCP mendalam. | Tool wajib untuk debugging, optimasi, dan learning jaringan. |
+| 8 | Rekomendasi: file >10MB untuk analisis lengkap congestion control. | Untuk observasi congestion control steady-state yang komprehensif. |

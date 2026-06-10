@@ -10,7 +10,7 @@
 
 ---
 
-## 1 Tujuan Praktikum
+## 1. Tujuan Praktikum
 | No | Tujuan | Penjelasan Sederhana |
 |----|--------|---------------------|
 | 1 | Memahami konsep DNS | Mengerti bagaimana nama website diubah jadi angka IP |
@@ -21,7 +21,7 @@
 
 ---
 
-## 2 Praktikum: Query DNS dengan nslookup
+## 2. Praktikum: Query DNS dengan nslookup
 
 ### 2.1 Query A Record (Basic Lookup)
 ```bash
@@ -107,7 +107,7 @@ yahoo.com   mail exchanger = 1 mta5.am0.yahoodns.net
 
 ---
 
-## 3 Manajemen DNS Cache (Windows)
+## 3. Manajemen DNS Cache (Windows)
 
 | Perintah | Fungsi | Output Singkat |
 |----------|--------|---------------|
@@ -128,7 +128,7 @@ A (Host) Record . . . : 142.250.190.46
 
 ---
 
-## 4 Analisis Paket DNS dengan Wireshark
+## 4. Analisis Paket DNS dengan Wireshark
 
 ### 4.1 Capture DNS Traffic (Akses www.ietf.org)
 **Langkah:**
@@ -219,7 +219,7 @@ dns && ip.addr == 10.159.118.110 && dns.qry.name == "www.aiit.or.kr"
 
 ---
 
-## 5 Ringkasan Hasil Praktikum
+## 5. Ringkasan Hasil Praktikum
 
 | Parameter | Nilai / Keterangan |
 |-----------|-------------------|
@@ -234,17 +234,17 @@ dns && ip.addr == 10.159.118.110 && dns.qry.name == "www.aiit.or.kr"
 
 ---
 
-## 6 Kesimpulan
+## 6. Kesimpulan
 
 | No | Poin Kesimpulan | Penjelasan Simpel |
 |----|----------------|-------------------|
-| 1 | DNS itu penting | Tanpa DNS, kita harus hafal angka IP tiap website |
-| 2 | nslookup itu berguna | Tool simpel buat cek "IP dari domain X apa?" |
-| 3 | DNS punya banyak jenis record | A untuk IP, NS untuk server resmi, MX untuk email, dll |
-| 4 | DNS bekerja bertingkat | Dari cache → DNS lokal → root → TLD → server asli |
-| 5 | DNS pakai UDP port 53 | Lebih cepat daripada TCP untuk query kecil |
-| 6 | Satu domain bisa punya banyak IP | Untuk load balancing dan backup (redundancy) |
-| 7 | CDN bikin DNS lebih kompleks | Domain bisa redirect ke server edge terdekat |
-| 8 | Cache DNS menghemat waktu | Hasil query disimpan sementara (TTL) agar tidak tanya ulang |
-| 9 | DNS publik vs lokal ada trade-off | Lokal cepat, publik stabil — pilih sesuai kebutuhan |
-| 10 | Wireshark bantu "lihat" DNS | Bisa intip paket query/response secara real-time |
+| 1 | DNS itu penting. | Tanpa DNS, kita harus hafal angka IP tiap website. |
+| 2 | nslookup itu berguna. | Tool simpel buat cek "IP dari domain X apa?". |
+| 3 | DNS punya banyak jenis record. | A untuk IP, NS untuk server resmi, MX untuk email, dll. |
+| 4 | DNS bekerja bertingkat. | Dari cache → DNS lokal → root → TLD → server asli.. |
+| 5 | DNS pakai UDP port 53. | Lebih cepat daripada TCP untuk query kecil. |
+| 6 | Satu domain bisa punya banyak IP. | Untuk load balancing dan backup (redundancy). |
+| 7 | CDN bikin DNS lebih kompleks. | Domain bisa redirect ke server edge terdekat. |
+| 8 | Cache DNS menghemat waktu. | Hasil query disimpan sementara (TTL) agar tidak tanya ulang. |
+| 9 | DNS publik vs lokal ada trade-off. | Lokal cepat, publik stabil — pilih sesuai kebutuhan. |
+| 10 | Wireshark bantu "lihat" DNS. | Bisa intip paket query/response secara real-time. |

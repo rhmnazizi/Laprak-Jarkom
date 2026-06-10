@@ -10,7 +10,7 @@
 
 ---
 
-## 1 Tujuan Praktikum
+## 1. Tujuan Praktikum
 | No | Tujuan | Penjelasan |
 |----|--------|-----------|
 | 1 | Membuat aplikasi client-server UDP | Memahami implementasi socket UDP untuk komunikasi tanpa koneksi |
@@ -20,7 +20,7 @@
 
 ---
 
-## 2 Praktikum UDP Socket
+## 2. Praktikum UDP Socket
 
 ### 2.1 Kode Program UDP Server
 
@@ -101,7 +101,7 @@ Client mengirim pesan dan menerima response dari server.
 
 ---
 
-## 3 Praktikum TCP Socket
+## 3. Praktikum TCP Socket
 
 ### 3.1 Kode Program TCP Server
 
@@ -187,7 +187,7 @@ Client terhubung ke server, mengirim pesan, dan menerima response.
 
 ---
 
-## 4 Perbandingan UDP vs TCP (Hasil Praktikum)
+## 4. Perbandingan UDP vs TCP (Hasil Praktikum)
 
 ### 4.1 Perbedaan Implementasi
 
@@ -212,7 +212,7 @@ Client terhubung ke server, mengirim pesan, dan menerima response.
 
 ---
 
-## 5 Analisis Praktikum
+## 5. Analisis Praktikum
 
 ### 5.1 UDP Socket
 
@@ -254,7 +254,7 @@ Client terhubung ke server, mengirim pesan, dan menerima response.
 
 ---
 
-## 6 Testing Tambahan
+## 6. Testing Tambahan
 
 ### 6.1 Multiple Clients (UDP)
 
@@ -280,7 +280,7 @@ Client terhubung ke server, mengirim pesan, dan menerima response.
 
 ---
 
-## 7 Kesimpulan
+## 7. Kesimpulan
 
 Berdasarkan praktikum yang telah dilakukan:
 

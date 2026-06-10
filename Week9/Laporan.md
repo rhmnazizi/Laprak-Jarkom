@@ -10,7 +10,7 @@
 
 ---
 
-## 1 Tujuan Praktikum
+## 1. Tujuan Praktikum
 1. Membuat web server sederhana menggunakan TCP socket programming
 2. Memahami format HTTP request dan response
 3. Menangani file request dan error 404 Not Found
@@ -18,7 +18,7 @@
 
 ---
 
-## 2 Kode Program Web Server
+## 2. Kode Program Web Server
 
 **File:** `WebServer.py`
 
@@ -68,7 +68,7 @@ sys.exit()
 
 ---
 
-## 3 File HTML Testing
+## 3. File HTML Testing
 
 **File:** `HelloWorld.html`
 
@@ -149,7 +149,7 @@ sys.exit()
 ```
 ---
 
-## 4 Hasil Praktikum
+## 4. Hasil Praktikum
 
 ### 4.1 Struktur Folder dan File
 
@@ -279,7 +279,7 @@ Response lengkap menunjukkan:
 
 ---
 
-## 5 Analisis HTTP Request/Response
+## 5. Analisis HTTP Request/Response
 
 ### 5.1 HTTP Request (dari Browser)
 ```
@@ -381,7 +381,7 @@ Content-Type: text/html
 
 ---
 
-## 6 Penjelasan Kode
+## 6. Penjelasan Kode
 
 ### 6.1 Setup Server Socket
 ```python
@@ -452,7 +452,7 @@ except IOError:
 
 ---
 
-## 7 Kesimpulan
+## 7. Kesimpulan
 
 Berdasarkan praktikum yang telah dilakukan:
 

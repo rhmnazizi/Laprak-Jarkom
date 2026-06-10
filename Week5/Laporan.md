@@ -24,7 +24,7 @@
 | 3 | Analisis port source-destination | Paham bagaimana port saling "balas" saat komunikasi |
 | 4 | Hitung kapasitas payload UDP | Bisa hitung berapa maksimal data yang bisa dikirim UDP |
 
-## 2 Langkah Kerja & Hasil
+## 2. Langkah Kerja & Hasil
 
 ### 2.1 Capture Paket UDP
 **Langkah:**
@@ -105,7 +105,7 @@ RESPONSE: 10.159.118.217:53    → 10.159.118.110:65423
 
 ---
 
-## 3 Ringkasan Hasil
+## 3. Ringkasan Hasil
 
 | Parameter | Nilai |
 |-----------|-------|
@@ -121,7 +121,7 @@ RESPONSE: 10.159.118.217:53    → 10.159.118.110:65423
 
 ---
 
-## 4 Kesimpulan
+## 4. Kesimpulan
 
 1. Header UDP hanya **8 byte** (4 field × 2 byte) → overhead kecil, cocok untuk aplikasi real-time.
 2. Field **Length** mencakup header + payload; nilai pada capture: 74 byte (query) dan 120 byte (response).
