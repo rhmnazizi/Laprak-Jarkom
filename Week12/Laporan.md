@@ -36,7 +36,6 @@ Python digunakan untuk membuat program ICMP Pinger pada modul ini.
 ### 2.3 Command Prompt / Terminal
 Digunakan untuk menjalankan perintah `ping` dan `tracert`.
 - **Platform:** Windows 11
-- **Lokasi perintah:** `c:\windows\system32\`
 
 ---
 
@@ -85,6 +84,8 @@ Berikut adalah langkah-langkah yang dilakukan selama praktikum Modul 12:
 ### 4.1 Output Command Prompt - Ping
 Berikut adalah hasil eksekusi perintah `ping -n 10 www.ust.hk`:
 
+![Command Prompt Ping](images/cmd.ping.png)
+
 Dari gambar di atas, terlihat bahwa:
 - 10 paket ICMP Echo Request berhasil dikirim.
 - 10 paket ICMP Echo Reply berhasil diterima.
@@ -96,7 +97,10 @@ Dari gambar di atas, terlihat bahwa:
 ### 4.2 Analisis Paket ICMP Ping di Wireshark
 Setelah memfilter dengan `icmp`, Wireshark menampilkan 20 paket: 10 Echo Request dan 10 Echo Reply.
 
+![Wireshark ICMP Ping](images/wireshark.ping.png)
+
 #### Detail Paket Echo Request (Tipe 8, Kode 0)
+![ICMP Echo Request Detail](images/icmp.echo.request.png)
 
 | Field | Nilai | Keterangan |
 |-------|-------|-----------|
@@ -114,31 +118,12 @@ Setelah memfilter dengan `icmp`, Wireshark menampilkan 20 paket: 10 Echo Request
 - Response time: **63.192 ms**
 - Payload berisi data ASCII: "abcdefghijklmnop" dan "qrstuvwxyz"
 
-#### Detail Paket Echo Reply (Tipe 0, Kode 0)
-
-| Field | Nilai | Keterangan |
-|-------|-------|-----------|
-| **Type** | **0** | Echo Reply |
-| **Code** | **0** | - |
-| **Checksum** | **0x5550** | Status: Good/Correct |
-| **Identifier (BE)** | **1 (0x0001)** | Big Endian |
-| **Identifier (LE)** | **256 (0x0100)** | Little Endian |
-| **Sequence Number (BE)** | **11 (0x000b)** | Urutan paket ke-11 |
-| **Sequence Number (LE)** | **2816 (0x0b00)** | Little Endian |
-
-Perbedaan utama dengan Echo Request adalah nilai **Type = 0**, yang menandakan respons dari host tujuan.
-
-**Analisis Paket di Wireshark:**
-- ✅ Terlihat 20 paket ICMP (frame 425-598)
-- ✅ Pattern: Request-Reply berpasangan
-- ✅ Sequence numbers: 11, 12, 13, ..., 20
-- ✅ Response times konsisten: 40-65 ms
-- ✅ Tidak ada packet loss
-- ✅ Source: **143.89.209.9** (host tujuan di Hong Kong - www.ust.hk)
-- ✅ Destination: **192.168.100.31** (local machine)
-
 ### 4.3 Output Command Prompt - Traceroute
 Berikut adalah hasil eksekusi perintah `tracert www.inria.fr`:
+
+![Command Prompt Traceroute](assets/cmd_tracert.png)
+
+Dari gambar di atas:
 - **Total Hops: 12** hops ke destination
 - Setiap hop mengirimkan 3 paket probe dengan nilai TTL yang meningkat (1, 2, 3, ...).
 - Router pada setiap hop mengembalikan pesan **ICMP Time Exceeded** (Type 11, Code 0).
@@ -162,8 +147,10 @@ Hop 12:  128.93.162.83           (Destination - inria.fr)
 - Average untuk hops 8-12: 200-400 ms
 
 ### 4.4 Analisis Paket ICMP Traceroute di Wireshark
+![Wireshark ICMP Traceroute](images/wireshark.traceroute.png)
 
 #### Detail Paket ICMP Time Exceeded (Tipe 11, Kode 0)
+![ICMP Time Exceeded Detail](images/icmp.time.exceeded.png)
 
 | Field | Nilai | Keterangan |
 |-------|-------|-----------|
@@ -191,62 +178,18 @@ Paket Time Exceeded berisi **salinan header IP asli** dari paket yang menyebabka
 
 ## 5. Pembahasan
 
-### 5.1 Perbandingan Ping dan Traceroute
+### 5.1 Perbandingan Fungsional Mekanisme ICMP (Ping vs Traceroute)
 
-**ICMP Ping:**
-- Menggunakan **Type 8 (Echo Request)** dan **Type 0 (Echo Reply)**
-- TTL default Windows: **128**
-- TTL yang diterima: **42** (berarti melewati ~86 hops)
-- Tujuan: Mengukur **round-trip time (RTT)** dan konektivitas end-to-end
-- Response time: **57-104 ms** ke Hong Kong
+| Karakteristik | ICMP Ping (Konektivitas *End-to-End*) | ICMP Traceroute (Pemetaan Jalur / *Hops*) |
+| :--- | :--- | :--- |
+| **Tipe ICMP Utama** | • `Type 8` (Echo Request)<br>• `Type 0` (Echo Reply) | • `Type 8` (Echo Request) dengan TTL inkremental<br>• `Type 11` (Time Exceeded) dari router perantara |
+| **Perlakuan TTL** | Konstan/Default (Windows: 128) | Naik bertahap secara berkala (1, 2, 3, dst.) |
+| **Tujuan Utama** | Mengukur *Round-Trip Time* (RTT) & keandalan koneksi. | Mengidentifikasi identitas IP dan performa di tiap *hop* jalur data. |
+| **Hasil Studi Kasus** | Sukses mencapai Hong Kong dengan RTT **57 - 104 ms**. | Sukses memetakan **12 hops** menuju server Prancis. |
 
-**ICMP Traceroute:**
-- Menggunakan **Type 8 (Echo Request)** dengan TTL incrementing (1, 2, 3, ...)
-- Router merespons dengan **Type 11 (Time Exceeded)** ketika TTL = 0
-- Tujuan akhir merespons dengan **Type 0 (Echo Reply)**
-- Tujuan: **Memetakan route** dan mengidentifikasi setiap hop di jalur
-- Total hops ke Perancis: **12 hops**
+### 5.2 Analisis Kuantitatif Performa, Nilai TTL, dan Packet Loss
 
-### 5.2 Analisis Performance
-
-**Dari Capture Ping (www.ust.hk - Hong Kong):**
-- **Average RTT**: **59-63 ms** (excellent untuk koneksi internasional)
-- **Jitter**: Rendah (stabil 57-64 ms)
-- **Packet Loss**: **0%** (10/10 packets received)
-- **Kualitas Koneksi**: Sangat baik
-
-**Dari Capture Traceroute (www.inria.fr - Perancis):**
-- **Total Hops**: **12 hops**
-- **Timeout Hops**: **2/12** (16.7% - hop 4 & 5)
-- **Success Rate**: 83.3% (10/12 hops merespons)
-- **Geographic Path**: Indonesia → ISP → RENATER (France) → INRIA
-- **Average RTT**: 200-400 ms (good untuk jarak jauh)
-
-### 5.3 Analisis TTL (Time To Live)
-
-**TTL = 42 pada Ping:**
-- TTL awal Windows: **128**
-- TTL yang diterima: **42**
-- **Perhitungan**: 128 - 42 = **86 hops** dari source ke destination
-- Ini menunjukkan paket melewati sekitar **86 router** dari Indonesia ke Hong Kong
-
-**TTL Incrementing pada Traceroute:**
-- Traceroute mengirim paket dengan TTL = 1, 2, 3, ... secara bertahap
-- Setiap router mengurangi TTL sebesar 1
-- Ketika TTL = 0, router mengirim **ICMP Time Exceeded (Type 11)**
-- Proses ini berlanjut sampai destination tercapai (TTL cukup besar)
-
-### 5.4 Analisis Packet Loss & Timeout
-
-**Ping: 0% Packet Loss**
-- ✅ Koneksi **stabil dan reliable**
-- ✅ Semua 10 paket berhasil dikirim dan diterima
-- ✅ Tidak ada kongesti jaringan yang signifikan
-
-**Traceroute: 2 Timeout Hops (Hop 4 & 5)**
-- ⚠️ **Request timed out** pada hop 4 dan 5
-- **Penyebab**:
-  1. Router dikonfigurasi untuk **tidak merespons ICMP** (security policy)
-  2. Firewall memblokir ICMP Time Exceeded messages
-  3. Router terlalu sibuk (high CPU utilization)
-- ✅ **Normal** - ini adalah hal yang wajar dalam traceroute
+| Parameter Analisis | Hasil Evaluasi Ping (`www.ust.hk`) | Hasil Evaluasi Traceroute (`www.inria.fr`) |
+| :--- | :--- | :--- |
+| **Analisis Performa** | **Sangat Baik & Stabil**<br>• Rata-rata RTT rendah (64 ms)<br>• Nilai *Jitter* (variasi delay) sangat minim. | **Wajar untuk Jarak Jauh**<br>• Estimasi RTT global berada di rentang 200-400 ms akibat jarak geografis lintas benua. |
+| **Analisis Nilai TTL** | **Sisa TTL = 43**<br>• Perhitungan: $128 - 43 = 85$<br>• Menandakan paket melewati sekitar **86 router** dari Indonesia ke Hong Kong. | **TTL Berinkremen**<br>• Dikirim berurutan dari TTL=1.<br>• Setiap router mengurangi nilai TTL sebesar 1 hingga menjadi 0 di perangkat perantara. |
